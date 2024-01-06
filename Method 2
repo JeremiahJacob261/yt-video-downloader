@@ -1,0 +1,26 @@
+from pytube import YouTube
+
+def download_video(url, output_path="."):
+    try:
+        # Create a YouTube object
+        yt = YouTube(url)
+
+        # Get the highest resolution stream
+        video_stream = yt.streams.get_highest_resolution()
+
+        # Print video details
+        print(f"Downloading: {yt.title}")
+        print(f"Resolution: {video_stream.resolution}")
+
+        # Set the output path and download the video
+        video_stream.download(output_path)
+
+        print("Download completed successfully!")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    # Example usage
+    video_url = input("Enter the YouTube video URL: ")
+    download_video(video_url)
